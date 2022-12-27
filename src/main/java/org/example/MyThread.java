@@ -12,10 +12,7 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
-        Connection con = null;
-        while (con == null) {
-            con = connectionPool.getConnection();
-        }
+        Connection con = connectionPool.getConnection();
         System.out.printf("%s has got a connection: %d\n", getName(), con.getId());
         task();
         System.out.printf("%s is about to release the connection: %d\n", getName(), con.getId());
@@ -28,7 +25,8 @@ public class MyThread extends Thread {
             Thread.sleep(800 * (int) ((Math.random() * (5))));
             System.out.printf("%s has finished the task\n", getName());
         } catch (InterruptedException e) {
-            e.getStackTrace();
+            Thread.currentThread().interrupt();
+            System.err.println("Thread Interrupted");
         }
     }
 
