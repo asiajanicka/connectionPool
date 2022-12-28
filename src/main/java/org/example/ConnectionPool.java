@@ -1,18 +1,19 @@
 package org.example;
 
-import java.util.Vector;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class ConnectionPool {
     int size;
-    private Vector<Connection> pool;
+    private BlockingQueue<Connection> pool;
 
     public ConnectionPool() {
-        pool = new Vector<>();
+
     }
 
     public ConnectionPool(int size) {
         this.size = size;
-        pool = new Vector<>();
+        pool = new ArrayBlockingQueue<>(size);
     }
 
     public synchronized Connection getConnection() {
@@ -53,5 +54,6 @@ public class ConnectionPool {
 
     public void setSize(int size) {
         this.size = size;
+        pool = new ArrayBlockingQueue<>(size);
     }
 }

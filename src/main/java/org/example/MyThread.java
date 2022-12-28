@@ -21,9 +21,9 @@ public class MyThread extends Thread {
 
     private void task() {
         try {
-            System.out.printf("%s is starting the task\n", getName());
+            System.out.printf("%s starts doing some work\n", getName());
             Thread.sleep(800 * (int) ((Math.random() * (5))));
-            System.out.printf("%s has finished the task\n", getName());
+            System.out.printf("%s has finished working\n", getName());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.err.println("Thread Interrupted");
